@@ -10,7 +10,7 @@ WORKDIR /app
 FROM base AS deps
 COPY package.json package-lock.json* ./
 COPY prisma ./prisma
-RUN npm ci
+RUN npm install --no-audit --no-fund
 
 # ── Builder ──────────────────────────────────────────────────
 FROM base AS builder
