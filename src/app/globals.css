@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 4%;
+    --primary: 0 0% 6%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 40 12% 96%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 40 10% 95%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 44 44% 52%;
+    --accent-foreground: 0 0% 8%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 90%;
+    --input: 0 0% 89%;
+    --ring: 44 44% 52%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 6%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 0 0% 8%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 44 44% 52%;
+    --accent-foreground: 0 0% 8%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 44 44% 52%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-ink;
+  }
+}
+
+@layer components {
+  .container-prose {
+    @apply mx-auto w-full max-w-7xl px-6 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.25em] text-gold-600;
+  }
+
+  .heading-display {
+    @apply font-display font-semibold tracking-tight text-ink;
+  }
+
+  /* Glassmorphism panel */
+  .glass {
+    @apply border border-white/40 bg-white/60 backdrop-blur-xl;
+  }
+
+  .glass-dark {
+    @apply border border-white/10 bg-black/40 backdrop-blur-xl;
+  }
+
+  /* Marble texture gradient backdrop */
+  .marble-bg {
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(191, 161, 74, 0.06), transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(0, 0, 0, 0.03), transparent 50%),
+      linear-gradient(180deg, #ffffff 0%, #f7f6f3 100%);
+  }
+
+  .gold-line {
+    @apply h-px w-12 bg-gradient-to-r from-gold to-transparent;
+  }
+
+  .link-underline {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all hover:after:w-full;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

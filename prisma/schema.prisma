@@ -1,0 +1,509 @@
+// ISHINOL Indonesia — Prisma schema
+// PostgreSQL. All public content is bilingual (Indonesian `_id` / English `_en`).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────────────────────
+// AUTH & ACCESS CONTROL
+// ─────────────────────────────────────────────────────────────
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  passwordHash  String
+  role          Role      @default(EDITOR)
+  avatarUrl     String?
+  isActive      Boolean   @default(true)
+  lastLoginAt   DateTime?
+  locale        String    @default("id")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  articles      Article[]
+  auditLogs     AuditLog[]
+  chatMessages  ChatMessage[]
+
+  @@index([role])
+}
+
+// ─────────────────────────────────────────────────────────────
+// PRODUCTS
+// ─────────────────────────────────────────────────────────────
+
+model ProductCategory {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  name_id     String
+  name_en     String
+  description_id String? @db.Text
+  description_en String? @db.Text
+  order       Int       @default(0)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  products    Product[]
+}
+
+model Product {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  categoryId      String?
+  category        ProductCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  name_id         String
+  name_en         String
+  tagline_id      String?
+  tagline_en      String?
+  description_id  String?  @db.Text
+  description_en  String?  @db.Text
+  // Stored as JSON arrays of bilingual strings
+  features_id     Json?
+  features_en     Json?
+  benefits_id     Json?
+  benefits_en     Json?
+  // Specifications: array of { label_id, label_en, value_id, value_en }
+  specifications  Json?
+
+  coverImage      String?
+  order           Int      @default(0)
+  isFeatured      Boolean  @default(false)
+  isActive        Boolean  @default(true)
+
+  // SEO
+  metaTitle_id        String?
+  metaTitle_en        String?
+  metaDescription_id  String?  @db.Text
+  metaDescription_en  String?  @db.Text
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  images          ProductImage[]
+  videos          ProductVideo[]
+  documents       ProductDocument[]
+
+  @@index([categoryId])
+  @@index([isFeatured])
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  alt_id    String?
+  alt_en    String?
+  order     Int     @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([productId])
+}
+
+model ProductVideo {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  title_id  String?
+  title_en  String?
+  // youtube | upload
+  source    String  @default("youtube")
+  url       String
+  thumbnail String?
+  order     Int     @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([productId])
+}
+
+model ProductDocument {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  title_id  String
+  title_en  String
+  // brochure | catalog | certificate | datasheet | manual
+  type      String  @default("brochure")
+  fileUrl   String
+  fileSize  Int?
+  order     Int     @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([productId])
+}
+
+// ─────────────────────────────────────────────────────────────
+// PORTFOLIO / PROJECTS
+// ─────────────────────────────────────────────────────────────
+
+model PortfolioCategory {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name_id   String
+  name_en   String
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  projects  PortfolioProject[]
+}
+
+model PortfolioProject {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  categoryId      String?
+  category        PortfolioCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  title_id        String
+  title_en        String
+  location        String?
+  client          String?
+  year            Int?
+  description_id  String?  @db.Text
+  description_en  String?  @db.Text
+
+  coverImage      String?
+  beforeImage     String?
+  afterImage      String?
+
+  isFeatured      Boolean  @default(false)
+  isActive        Boolean  @default(true)
+  order           Int      @default(0)
+
+  metaTitle_id        String?
+  metaTitle_en        String?
+  metaDescription_id  String?  @db.Text
+  metaDescription_en  String?  @db.Text
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  images          PortfolioImage[]
+  videos          PortfolioVideo[]
+
+  @@index([categoryId])
+  @@index([isFeatured])
+}
+
+model PortfolioImage {
+  id        String  @id @default(cuid())
+  projectId String
+  project   PortfolioProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  url       String
+  caption_id String?
+  caption_en String?
+  order     Int     @default(0)
+
+  @@index([projectId])
+}
+
+model PortfolioVideo {
+  id        String  @id @default(cuid())
+  projectId String
+  project   PortfolioProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title_id  String?
+  title_en  String?
+  source    String  @default("youtube")
+  url       String
+  thumbnail String?
+  order     Int     @default(0)
+
+  @@index([projectId])
+}
+
+// ─────────────────────────────────────────────────────────────
+// NEWS & ARTICLES
+// ─────────────────────────────────────────────────────────────
+
+model ArticleCategory {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name_id   String
+  name_en   String
+  createdAt DateTime @default(now())
+
+  articles  Article[]
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name_id   String
+  name_en   String
+
+  articles  Article[]
+}
+
+model Article {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  categoryId      String?
+  category        ArticleCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  authorId        String?
+  author          User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+
+  title_id        String
+  title_en        String
+  excerpt_id      String?  @db.Text
+  excerpt_en      String?  @db.Text
+  content_id      String?  @db.Text
+  content_en      String?  @db.Text
+
+  coverImage      String?
+  isPublished     Boolean  @default(false)
+  isFeatured      Boolean  @default(false)
+  publishedAt     DateTime?
+  views           Int      @default(0)
+
+  metaTitle_id        String?
+  metaTitle_en        String?
+  metaDescription_id  String?  @db.Text
+  metaDescription_en  String?  @db.Text
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  tags            Tag[]
+
+  @@index([categoryId])
+  @@index([isPublished])
+}
+
+// ─────────────────────────────────────────────────────────────
+// MEDIA, VIDEOS, TESTIMONIALS, HERO
+// ─────────────────────────────────────────────────────────────
+
+model MediaLibrary {
+  id        String   @id @default(cuid())
+  // image | video | pdf | document
+  type      String   @default("image")
+  url       String
+  fileName  String
+  mimeType  String?
+  fileSize  Int?
+  alt_id    String?
+  alt_en    String?
+  folder    String   @default("general")
+  createdAt DateTime @default(now())
+
+  @@index([type])
+  @@index([folder])
+}
+
+model Video {
+  id          String   @id @default(cuid())
+  title_id    String
+  title_en    String
+  description_id String? @db.Text
+  description_en String? @db.Text
+  // youtube | upload
+  source      String   @default("youtube")
+  url         String
+  thumbnail   String?
+  category    String   @default("marketing")
+  isFeatured  Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@index([category])
+  @@index([isFeatured])
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  author      String
+  role_id     String?
+  role_en     String?
+  company     String?
+  avatarUrl   String?
+  quote_id    String   @db.Text
+  quote_en    String   @db.Text
+  rating      Int      @default(5)
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model HeroBanner {
+  id          String   @id @default(cuid())
+  eyebrow_id  String?
+  eyebrow_en  String?
+  headline_id String
+  headline_en String
+  subheadline_id String? @db.Text
+  subheadline_en String? @db.Text
+  imageUrl    String?
+  videoUrl    String?
+  ctaLabel_id String?
+  ctaLabel_en String?
+  ctaHref     String?
+  secondaryCtaLabel_id String?
+  secondaryCtaLabel_en String?
+  secondaryCtaHref     String?
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+// ─────────────────────────────────────────────────────────────
+// LEADS, CONTACTS, CHAT
+// ─────────────────────────────────────────────────────────────
+
+model Lead {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  company   String?
+  subject   String?
+  message   String   @db.Text
+  // contact | product-inquiry | quote
+  source    String   @default("contact")
+  // new | contacted | qualified | closed
+  status    String   @default("new")
+  productSlug String?
+  locale    String   @default("id")
+  createdAt DateTime @default(now())
+
+  @@index([status])
+}
+
+model ChatSession {
+  id         String   @id @default(cuid())
+  visitorId  String
+  visitorName String?
+  email      String?
+  status     String   @default("open") // open | closed
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  messages   ChatMessage[]
+
+  @@index([status])
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  sessionId String
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  // visitor | admin
+  sender    String
+  adminId   String?
+  admin     User?    @relation(fields: [adminId], references: [id], onDelete: SetNull)
+  body      String   @db.Text
+  readAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([sessionId])
+}
+
+// ─────────────────────────────────────────────────────────────
+// SETTINGS, SEO, AUDIT, ANALYTICS
+// ─────────────────────────────────────────────────────────────
+
+model SiteSettings {
+  id            String  @id @default("singleton")
+  companyName   String  @default("ISHINOL Indonesia")
+  logoUrl       String?
+  logoDarkUrl   String?
+  faviconUrl    String?
+  tagline_id    String?
+  tagline_en    String?
+  about_id      String? @db.Text
+  about_en      String? @db.Text
+  addressLine   String?
+  city          String?
+  email         String?
+  phone         String?
+  whatsapp      String?
+  mapEmbedUrl   String?
+  instagramUrl  String?
+  facebookUrl   String?
+  linkedinUrl   String?
+  youtubeUrl    String?
+  gaMeasurementId String?
+  updatedAt     DateTime @updatedAt
+}
+
+model SeoSetting {
+  id              String  @id @default(cuid())
+  // page key: home | about | products | portfolio | news | contact | downloads | videos
+  pageKey         String  @unique
+  metaTitle_id    String?
+  metaTitle_en    String?
+  metaDescription_id String? @db.Text
+  metaDescription_en String? @db.Text
+  ogImage         String?
+  keywords        String?
+  updatedAt       DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String   // CREATE | UPDATE | DELETE | LOGIN | LOGOUT
+  entity    String   // Product | Article | ...
+  entityId  String?
+  metadata  Json?
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([entity])
+}
+
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  locale    String   @default("id")
+  referrer  String?
+  country   String?
+  createdAt DateTime @default(now())
+
+  @@index([path])
+  @@index([createdAt])
+}
+
+model DownloadEvent {
+  id          String   @id @default(cuid())
+  documentId  String?
+  title       String
+  createdAt   DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model Download {
+  id          String   @id @default(cuid())
+  title_id    String
+  title_en    String
+  description_id String? @db.Text
+  description_en String? @db.Text
+  // brochure | catalog | certificate | datasheet | documentation
+  category    String   @default("brochure")
+  fileUrl     String
+  fileSize    Int?
+  thumbnail   String?
+  downloads   Int      @default(0)
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@index([category])
+}

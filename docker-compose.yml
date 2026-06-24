@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ishinol
+      POSTGRES_PASSWORD: ishinol
+      POSTGRES_DB: ishinol
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ishinol"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgresql://ishinol:ishinol@db:5432/ishinol?schema=public"
+      AUTH_SECRET: "${AUTH_SECRET:-please-change-this-in-production}"
+      AUTH_TRUST_HOST: "true"
+      NEXTAUTH_URL: "${NEXTAUTH_URL:-http://localhost:3000}"
+      NEXT_PUBLIC_SITE_URL: "${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}"
+      NEXT_PUBLIC_WHATSAPP_NUMBER: "6285697777292"
+      ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY:-}"
+    ports:
+      - "3000:3000"
+    # Run migrations + seed on first boot, then start the server.
+    command: >
+      sh -c "npx prisma migrate deploy && node server.js"
+
+volumes:
+  pgdata:
