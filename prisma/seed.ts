@@ -76,9 +76,8 @@ async function main() {
   // ── Product categories + products ─────────────────────────
   const categoryMap: Record<string, string> = {};
   for (const [slug, names] of Object.entries({
-    coating: { id: "Pelapis", en: "Coating" },
-    restoration: { id: "Restorasi", en: "Restoration" },
-    protection: { id: "Perlindungan", en: "Protection" },
+    coating: { id: "Coating", en: "Coating" },
+    cleaning: { id: "Cleaning Agent", en: "Cleaning Agent" },
   })) {
     const cat = await prisma.productCategory.upsert({
       where: { slug },
@@ -121,9 +120,7 @@ async function main() {
   // ── Portfolio ──────────────────────────────────────────
   const portfolioCats: Record<string, string> = {};
   for (const [slug, names] of Object.entries({
-    residence: { id: "Hunian", en: "Residence" },
-    hotel: { id: "Hotel", en: "Hotel" },
-    office: { id: "Kantor", en: "Office" },
+    landmark: { id: "Bangunan Ikonik", en: "Landmark" },
   })) {
     const cat = await prisma.portfolioCategory.upsert({
       where: { slug },
