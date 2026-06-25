@@ -16,7 +16,7 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱  Seeding ISHINOL Indonesia database…");
 
-  // ── Users ──────────────────────────────────────────────
+  // ── Users ───────────────────────────────────────────────
   const adminEmail = process.env.SEED_ADMIN_EMAIL ?? "admin@ishinol.co.id";
   const adminPassword = process.env.SEED_ADMIN_PASSWORD ?? "Ishinol#2026";
   const passwordHash = await bcrypt.hash(adminPassword, 12);
@@ -45,42 +45,40 @@ async function main() {
   console.log(`   ✓ Users (super admin: ${adminEmail})`);
 
   // ── Site settings ──────────────────────────────────────
+  const settingsData = {
+    companyName: "PT Indocoat Ishinol Utama",
+    tagline_id: "Pelapis pelindung marmer premium dari Jepang",
+    tagline_en: "Premium Japanese marble protection coating",
+    about_id: fallbackAbout.distributor_id,
+    about_en: fallbackAbout.distributor_en,
+    addressLine: "Jakarta, Indonesia",
+    city: "Jakarta",
+    email: "info@ishinol.co.id",
+    phone: "+62 856-9777-7292",
+    whatsapp: "6285697777292",
+    instagramUrl: "https://instagram.com/ishinol.indonesia",
+    facebookUrl: "https://facebook.com/ishinol.indonesia",
+    linkedinUrl: "https://linkedin.com/company/ishinol-indonesia",
+    youtubeUrl: "https://youtube.com/@ishinol",
+  };
   await prisma.siteSettings.upsert({
     where: { id: "singleton" },
-    update: {},
-    create: {
-      id: "singleton",
-      companyName: "ISHINOL Indonesia",
-      tagline_id: "Perlindungan permukaan premium dari Jepang",
-      tagline_en: "Premium Japanese surface protection",
-      about_id: fallbackAbout.distributor_id,
-      about_en: fallbackAbout.distributor_en,
-      addressLine: "Jakarta, Indonesia",
-      city: "Jakarta",
-      email: "info@ishinol.co.id",
-      phone: "+62 856-9777-7292",
-      whatsapp: "6285697777292",
-      instagramUrl: "https://instagram.com/ishinol.indonesia",
-      facebookUrl: "https://facebook.com/ishinol.indonesia",
-      linkedinUrl: "https://linkedin.com/company/ishinol-indonesia",
-      youtubeUrl: "https://youtube.com/@ishinol",
-    },
+    update: settingsData,
+    create: { id: "singleton", ...settingsData },
   });
   console.log("   ✓ Site settings");
 
-  // ── Hero ───────────────────────────────────────────────
-  const existingHero = await prisma.heroBanner.count();
-  if (existingHero === 0) {
-    await prisma.heroBanner.create({ data: { ...fallbackHero, order: 0 } });
-  }
+  // ── Hero (full refresh) ──────────────────────────────────
+  await prisma.heroBanner.deleteMany();
+  await prisma.heroBanner.create({ data: { ...fallbackHero, order: 0 } });
   console.log("   ✓ Hero banner");
 
-  // ── Product categories + products ──────────────────────
+  // ── Product categories + products ─────────────────────────
   const categoryMap: Record<string, string> = {};
   for (const [slug, names] of Object.entries({
     coating: { id: "Pelapis", en: "Coating" },
     restoration: { id: "Restorasi", en: "Restoration" },
-    safety: { id: "Keamanan", en: "Safety" },
+    protection: { id: "Perlindungan", en: "Protection" },
   })) {
     const cat = await prisma.productCategory.upsert({
       where: { slug },
@@ -90,11 +88,12 @@ async function main() {
     categoryMap[slug] = cat.id;
   }
 
+  // Full refresh so re-running the seed reflects the latest content
+  // (old product slugs changed during the marble rebrand).
+  await prisma.product.deleteMany();
   for (const [i, p] of fallbackProducts.entries()) {
-    await prisma.product.upsert({
-      where: { slug: p.slug },
-      update: {},
-      create: {
+    await prisma.product.create({
+      data: {
         slug: p.slug,
         categoryId: categoryMap[p.category] ?? null,
         name_id: p.name_id,
@@ -134,11 +133,10 @@ async function main() {
     portfolioCats[slug] = cat.id;
   }
 
+  await prisma.portfolioProject.deleteMany();
   for (const [i, p] of fallbackProjects.entries()) {
-    await prisma.portfolioProject.upsert({
-      where: { slug: p.slug },
-      update: {},
-      create: {
+    await prisma.portfolioProject.create({
+      data: {
         slug: p.slug,
         categoryId: portfolioCats[p.category] ?? null,
         title_id: p.title_id,
@@ -159,7 +157,7 @@ async function main() {
   }
   console.log(`   ✓ ${fallbackProjects.length} portfolio projects`);
 
-  // ── Articles ───────────────────────────────────────────
+  // ── Articles ──────────────────────────────────────────
   const articleCats: Record<string, string> = {};
   for (const [slug, names] of Object.entries({
     tips: { id: "Tips", en: "Tips" },
@@ -198,23 +196,22 @@ async function main() {
   }
   console.log(`   ✓ ${fallbackArticles.length} articles`);
 
-  // ── Testimonials ───────────────────────────────────────
+  // ── Testimonials ──────────────────────────────────────
   await prisma.testimonial.deleteMany();
   for (const [i, t] of fallbackTestimonials.entries()) {
     await prisma.testimonial.create({ data: { ...t, order: i } });
   }
   console.log(`   ✓ ${fallbackTestimonials.length} testimonials`);
 
-  // ── Videos ─────────────────────────────────────────────
-  const videoCount = await prisma.video.count();
-  if (videoCount === 0) {
-    for (const [i, v] of fallbackVideos.entries()) {
-      await prisma.video.create({ data: { ...v, order: i } });
-    }
+  // ── Videos ──────────────────────────────────────────
+  // Remove any placeholder videos; real videos are added from the Admin CMS.
+  await prisma.video.deleteMany();
+  for (const [i, v] of fallbackVideos.entries()) {
+    await prisma.video.create({ data: { ...v, order: i } });
   }
   console.log(`   ✓ ${fallbackVideos.length} videos`);
 
-  // ── Downloads ──────────────────────────────────────────
+  // ── Downloads ─────────────────────────────────────────
   const dlCount = await prisma.download.count();
   if (dlCount === 0) {
     for (const [i, d] of fallbackDownloads.entries()) {
@@ -232,7 +229,7 @@ async function main() {
   }
   console.log(`   ✓ ${fallbackDownloads.length} downloads`);
 
-  // ── SEO settings ───────────────────────────────────────
+  // ── SEO settings ──────────────────────────────────────
   for (const pageKey of ["home", "about", "products", "portfolio", "news", "contact"]) {
     await prisma.seoSetting.upsert({
       where: { pageKey },

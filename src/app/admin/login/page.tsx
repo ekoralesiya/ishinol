@@ -14,8 +14,10 @@ export default async function LoginPage() {
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-ink text-xl font-bold tracking-tight text-gold">
             IS
           </div>
-          <h1 className="font-display text-2xl font-semibold text-ink">ISHINOL Indonesia</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Content Management System</p>
+          <h1 className="font-display text-2xl font-semibold text-ink">ISHINOL</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            PT Indocoat Ishinol Utama — CMS
+          </p>
         </div>
 
         <Card className="shadow-lg">
@@ -31,7 +33,7 @@ export default async function LoginPage() {
         </Card>
 
         <p className="mt-6 text-center text-xs text-muted-foreground">
-          ISHINOL Indonesia — authorized personnel only.
+          PT Indocoat Ishinol Utama — authorized personnel only.
         </p>
       </div>
     </div>

@@ -30,11 +30,11 @@ function buildPrompt(action: Action, text: string, targetLang?: string): string 
   const lang = targetLang === "en" ? "English" : targetLang === "id" ? "Indonesian" : null;
   switch (action) {
     case "generate-product-description":
-      return `You are a copywriter for ISHINOL Indonesia, a premium distributor of Japanese stone, marble and granite coating products. Write a compelling, professional product description (2-3 short paragraphs) based on this input. Return only the description text.\n\nInput:\n${text}`;
+      return `You are a copywriter for PT Indocoat Ishinol Utama, the official Indonesian distributor of ISHINOL — a premium Japanese marble protection coating. Write a compelling, professional product description (2-3 short paragraphs) about marble protection based on this input. Return only the description text.\n\nInput:\n${text}`;
     case "generate-benefits":
       return `Based on the following product information, generate a concise bullet list of 4-6 customer benefits. Return one benefit per line, no bullet characters, no numbering.\n\nInput:\n${text}`;
     case "generate-article":
-      return `Write a professional, well-structured news/blog article for ISHINOL Indonesia based on this brief. Use clear paragraphs. Return only the article body.\n\nBrief:\n${text}`;
+      return `Write a professional, well-structured news/blog article for PT Indocoat Ishinol Utama (official ISHINOL marble-coating distributor in Indonesia) based on this brief. Use clear paragraphs. Return only the article body.\n\nBrief:\n${text}`;
     case "rewrite":
       return `Rewrite the following text to be clearer, more professional and engaging while preserving meaning. Return only the rewritten text.\n\nText:\n${text}`;
     case "generate-seo":
