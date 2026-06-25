@@ -27,7 +27,7 @@ export const fallbackHero = {
 };
 
 export const fallbackProducts = [
-  // ── COATING ────────────────────────────────────
+  // ── COATING ──────────────────────────────────────────────
   {
     slug: "clear-coat-g",
     name_id: "Clear Coat G",
@@ -113,7 +113,7 @@ export const fallbackProducts = [
     isFeatured: true,
     category: "coating",
   },
-  // ── CLEANING AGENT ──────────────────────────────
+  // ── CLEANING AGENT ───────────────────────────────────────
   {
     slug: "ishi-clean-super-sp",
     name_id: "Ishi-Clean Super SP",
