@@ -8,6 +8,7 @@ type StaticPath =
   | "/about-us"
   | "/products"
   | "/portfolio"
+  | "/clients"
   | "/news"
   | "/videos"
   | "/downloads"
@@ -16,8 +17,8 @@ type StaticPath =
 const QUICK: { href: StaticPath; key: string }[] = [
   { href: "/products", key: "products" },
   { href: "/portfolio", key: "portfolio" },
+  { href: "/clients", key: "clients" },
   { href: "/news", key: "news" },
-  { href: "/videos", key: "videos" },
 ];
 
 const COMPANY: { href: StaticPath; key: string }[] = [
