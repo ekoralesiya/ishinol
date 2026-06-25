@@ -81,8 +81,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://images.unsplash.com/photo-1604014237800-1c9102c219da?auto=format&fit=crop&w=1200&q=80"
-                alt="ISHINOL craftsmanship"
+                src="/sections/about-marble.jpg"
+                alt="Marmer premium yang dilindungi ISHINOL"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -144,8 +144,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
             <div className="relative aspect-square overflow-hidden rounded-2xl shadow-2xl">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80"
-                alt="Protected marble surface"
+                src="/sections/benefits-marble.jpg"
+                alt="Permukaan marmer terlindungi ISHINOL"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -192,8 +192,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
           </Reveal>
           <Reveal delay={1}>
             <BeforeAfter
-              before="https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=1600&q=80"
-              after="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"
+              before="/sections/before-uncoated.jpg"
+              after="/sections/after-coated.jpg"
               beforeLabel={t("before")}
               afterLabel={t("after")}
             />
