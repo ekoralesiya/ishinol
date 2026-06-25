@@ -31,6 +31,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({ locale, path: `/${locale}` });
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

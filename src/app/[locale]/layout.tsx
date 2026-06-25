@@ -12,6 +12,10 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+// Render public pages dynamically so CMS/database content changes appear
+// immediately, without needing a Vercel rebuild.
+export const dynamic = "force-dynamic";
+
 export default async function LocaleLayout({
   children,
   params,

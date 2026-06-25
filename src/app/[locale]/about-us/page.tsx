@@ -31,6 +31,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
 
 const VALUE_ICONS = [BadgeCheck, Hammer, Handshake, Sparkles] as const;
 
+export const dynamic = "force-dynamic";
+
 export default async function AboutPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

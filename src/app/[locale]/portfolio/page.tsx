@@ -17,6 +17,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   });
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function PortfolioPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

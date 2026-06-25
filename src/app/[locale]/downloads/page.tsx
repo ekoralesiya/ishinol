@@ -42,6 +42,8 @@ type DownloadItem = Record<string, unknown> & {
   fileSize?: number | null;
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function DownloadsPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
