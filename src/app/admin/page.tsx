@@ -65,6 +65,16 @@ export default async function DashboardPage() {
   if (!session) redirect("/admin/login");
   const user = session.user;
 
+  // Detect database connectivity so we can warn instead of silently showing zeros.
+  let dbError: string | null = null;
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+  } catch (e) {
+    dbError =
+      (e instanceof Error ? e.message.split("\n").find((l) => l.trim())?.trim() : null) ??
+      "Database connection failed";
+  }
+
   const [products, projects, articles, newLeads, videos, downloads] = await Promise.all([
     safe(() => prisma.product.count(), 0),
     safe(() => prisma.portfolioProject.count(), 0),
@@ -95,8 +105,19 @@ export default async function DashboardPage() {
     <AdminShell user={user}>
       <PageHeader
         title={`Welcome back${user.name ? `, ${user.name.split(" ")[0]}` : ""}`}
-        description="Overview of your ISHINOL Indonesia content and inquiries."
+        description="Overview of your PT Indocoat Ishinol Utama content and inquiries."
       />
+
+      {dbError && (
+        <div className="mb-6 rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+          <p className="font-semibold">⚠️ Database tidak terhubung / Database not connected</p>
+          <p className="mt-1 text-destructive/90">
+            Statistik & konten di bawah mungkin kosong. Periksa <code>DATABASE_URL</code> /{" "}
+            <code>DIRECT_URL</code> (kredensial Supabase) pada environment variables.
+          </p>
+          <p className="mt-1 font-mono text-xs opacity-80">{dbError}</p>
+        </div>
+      )}
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
         <StatCard label="Products" value={products} icon={Package} href="/admin/products" />

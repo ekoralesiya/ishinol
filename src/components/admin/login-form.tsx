@@ -25,7 +25,21 @@ export function LoginForm() {
         redirectTo: "/admin",
       });
       if (!res || res.error) {
-        setError("Invalid email or password.");
+        // Distinguish "wrong credentials" from "database not reachable".
+        let message = "Email atau password salah. / Invalid email or password.";
+        try {
+          const health = await fetch("/api/health/db", { cache: "no-store" });
+          if (!health.ok) {
+            const data = await health.json().catch(() => ({}));
+            message =
+              "⚠️ Database tidak terhubung — periksa DATABASE_URL / kredensial Supabase. " +
+              (data?.error ? `(${data.error})` : "");
+          }
+        } catch {
+          message =
+            "⚠️ Tidak dapat menghubungi server. Periksa koneksi internet / status deployment.";
+        }
+        setError(message);
         setLoading(false);
         return;
       }
