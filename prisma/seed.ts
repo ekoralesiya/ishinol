@@ -211,7 +211,7 @@ async function main() {
   }
   console.log(`   ✓ ${fallbackVideos.length} videos`);
 
-  // ── Downloads ────────────────────────────────────────
+  // ── Downloads ─────────────────────────────────────────
   const dlCount = await prisma.download.count();
   if (dlCount === 0) {
     for (const [i, d] of fallbackDownloads.entries()) {
@@ -229,7 +229,7 @@ async function main() {
   }
   console.log(`   ✓ ${fallbackDownloads.length} downloads`);
 
-  // ── SEO settings ───────────────────────────────────────
+  // ── SEO settings ──────────────────────────────────────
   for (const pageKey of ["home", "about", "products", "portfolio", "news", "contact"]) {
     await prisma.seoSetting.upsert({
       where: { pageKey },
