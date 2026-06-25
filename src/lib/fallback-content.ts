@@ -27,7 +27,7 @@ export const fallbackHero = {
 };
 
 export const fallbackProducts = [
-  // ── COATING ──────────────────────────────────────────────
+  // ── COATING ────────────────────────────────────
   {
     slug: "clear-coat-g",
     name_id: "Clear Coat G",
@@ -113,7 +113,7 @@ export const fallbackProducts = [
     isFeatured: true,
     category: "coating",
   },
-  // ── CLEANING AGENT ───────────────────────────────────────
+  // ── CLEANING AGENT ──────────────────────────────
   {
     slug: "ishi-clean-super-sp",
     name_id: "Ishi-Clean Super SP",
@@ -402,6 +402,16 @@ export const fallbackDownloads = [
     fileSize: null,
   },
 ];
+
+// Clients (Klien Kami) are managed from the Admin CMS (Clients module).
+// No placeholder clients are shipped — add real clients & logos from /admin.
+export const fallbackClients: Array<{
+  id: string;
+  name: string;
+  logoUrl: string | null;
+  website: string | null;
+  category: string;
+}> = [];
 
 export const fallbackAbout = {
   distributor_id:

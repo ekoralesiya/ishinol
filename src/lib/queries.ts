@@ -145,6 +145,16 @@ export async function getDownloads() {
   }, fb.fallbackDownloads);
 }
 
+export async function getClients() {
+  return safe(async () => {
+    const rows = await prisma.client.findMany({
+      where: { isActive: true },
+      orderBy: { order: "asc" },
+    });
+    return rows as unknown as typeof fb.fallbackClients;
+  }, fb.fallbackClients);
+}
+
 export async function getSiteSettings() {
   return safe(
     async () => await prisma.siteSettings.findUnique({ where: { id: "singleton" } }),
