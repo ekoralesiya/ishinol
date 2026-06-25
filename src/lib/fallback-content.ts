@@ -6,14 +6,14 @@
  */
 
 export const fallbackHero = {
-  eyebrow_id: "Perlindungan Permukaan Premium dari Jepang",
-  eyebrow_en: "Japanese Premium Surface Protection",
-  headline_id: "Seni Melindungi Batu Alam",
-  headline_en: "The Art of Protecting Stone",
+  eyebrow_id: "Perlindungan Marmer Premium dari Jepang",
+  eyebrow_en: "Japanese Premium Marble Protection",
+  headline_id: "Seni Melindungi Marmer",
+  headline_en: "The Art of Protecting Marble",
   subheadline_id:
-    "ISHINOL melindungi marmer, granit, dan batu alam dengan pelapis Jepang yang mewah dan tahan lama — menjaga kilau permukaan untuk generasi mendatang.",
+    "ISHINOL melindungi marmer dengan pelapis Jepang yang mewah dan tahan lama — menolak noda dan air sambil menjaga kilau alaminya untuk generasi mendatang.",
   subheadline_en:
-    "ISHINOL safeguards marble, granite and natural stone with a luxurious, durable Japanese coating — preserving brilliance for generations.",
+    "ISHINOL safeguards marble with a luxurious, durable Japanese coating — repelling stains and water while preserving its natural brilliance for generations.",
   imageUrl:
     "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=2400&q=80",
   videoUrl: "",
@@ -27,36 +27,36 @@ export const fallbackHero = {
 
 export const fallbackProducts = [
   {
-    slug: "ishinol-stone-coating",
-    name_id: "ISHINOL Stone Coating",
-    name_en: "ISHINOL Stone Coating",
-    tagline_id: "Pelapis pelindung utama untuk batu alam",
-    tagline_en: "The flagship protective coating for natural stone",
+    slug: "ishinol-marble-coating",
+    name_id: "ISHINOL Marble Coating",
+    name_en: "ISHINOL Marble Coating",
+    tagline_id: "Pelapis pelindung utama untuk marmer",
+    tagline_en: "The flagship protective coating for marble",
     description_id:
-      "Pelapis penetrasi tak terlihat yang meresap ke dalam pori batu alam, membentuk perlindungan permanen terhadap noda, air, dan minyak tanpa mengubah tampilan alami permukaan.",
+      "Pelapis penetrasi tak terlihat yang meresap ke dalam pori marmer, membentuk perlindungan permanen terhadap noda, air, dan minyak tanpa mengubah tampilan alami marmer.",
     description_en:
-      "An invisible penetrating coating that absorbs deep into the pores of natural stone, forming a permanent shield against stains, water and oil without altering the surface's natural appearance.",
+      "An invisible penetrating coating that absorbs deep into the pores of marble, forming a permanent shield against stains, water and oil without altering the marble's natural appearance.",
     features_id: [
       "Teknologi penetrasi dalam dari Jepang",
-      "Tidak mengubah warna atau tekstur alami",
+      "Tidak mengubah warna atau tekstur alami marmer",
       "Perlindungan permanen sekali aplikasi",
       "Ramah lingkungan dan aman untuk interior",
     ],
     features_en: [
       "Deep-penetration Japanese technology",
-      "Does not alter natural color or texture",
+      "Does not alter marble's natural color or texture",
       "Permanent protection in a single application",
       "Eco-friendly and safe for interiors",
     ],
     benefits_id: [
-      "Mencegah noda membandel secara permanen",
+      "Mencegah noda membandel pada marmer secara permanen",
       "Memudahkan perawatan harian",
-      "Memperpanjang usia permukaan batu",
+      "Memperpanjang usia permukaan marmer",
     ],
     benefits_en: [
-      "Permanently prevents stubborn stains",
+      "Permanently prevents stubborn marble stains",
       "Simplifies daily maintenance",
-      "Extends the lifespan of stone surfaces",
+      "Extends the lifespan of marble surfaces",
     ],
     specifications: [
       { label_id: "Asal", label_en: "Origin", value_id: "Jepang", value_en: "Japan" },
@@ -101,26 +101,35 @@ export const fallbackProducts = [
     category: "restoration",
   },
   {
-    slug: "ishinol-anti-slip",
-    name_id: "ISHINOL Anti-Slip",
-    name_en: "ISHINOL Anti-Slip",
-    tagline_id: "Keamanan tanpa mengorbankan keindahan",
-    tagline_en: "Safety without compromising beauty",
+    slug: "ishinol-marble-guard",
+    name_id: "ISHINOL Marble Guard",
+    name_en: "ISHINOL Marble Guard",
+    tagline_id: "Perlindungan harian anti-noda untuk marmer",
+    tagline_en: "Everyday anti-stain protection for marble",
     description_id:
-      "Perlakuan tak terlihat yang meningkatkan daya cengkeram permukaan batu dan ubin saat basah, ideal untuk area kolam, kamar mandi, dan lobi hotel.",
+      "Lapisan pelindung tak terlihat yang menolak air, kopi, minyak, dan cairan asam pada permukaan marmer — ideal untuk meja dapur, kamar mandi, dan lantai lobi.",
     description_en:
-      "An invisible treatment that increases the grip of stone and tile surfaces when wet — ideal for pool areas, bathrooms and hotel lobbies.",
-    features_id: ["Tidak terlihat", "Efektif saat basah", "Tahan lama"],
-    features_en: ["Invisible", "Effective when wet", "Long lasting"],
-    benefits_id: ["Mengurangi risiko terpeleset", "Aman untuk area publik"],
-    benefits_en: ["Reduces slip risk", "Safe for public areas"],
+      "An invisible protective layer that repels water, coffee, oil and acidic spills on marble surfaces — ideal for kitchen tops, bathrooms and lobby floors.",
+    features_id: [
+      "Menolak air dan cairan asam",
+      "Mencegah etsa dan noda kusam",
+      "Aman untuk permukaan kontak makanan",
+    ],
+    features_en: [
+      "Repels water and acidic liquids",
+      "Prevents etching and dull stains",
+      "Safe for food-contact surfaces",
+    ],
+    benefits_id: ["Marmer tetap bersih lebih lama", "Perawatan cukup dilap"],
+    benefits_en: ["Marble stays cleaner for longer", "Maintenance is just a wipe"],
     specifications: [
       { label_id: "Asal", label_en: "Origin", value_id: "Jepang", value_en: "Japan" },
+      { label_id: "Aplikasi", label_en: "Application", value_id: "Interior", value_en: "Interior" },
     ],
     coverImage:
-      "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=1600&q=80",
     isFeatured: true,
-    category: "safety",
+    category: "protection",
   },
 ];
 
@@ -161,9 +170,9 @@ export const fallbackProjects = [
     year: 2023,
     category: "office",
     description_id:
-      "Restorasi dan perlindungan fasad granit serta lantai marmer lobi gedung perkantoran 40 lantai.",
+      "Restorasi dan perlindungan lantai marmer lobi serta area resepsionis gedung perkantoran 40 lantai.",
     description_en:
-      "Restoration and protection of the granite façade and marble lobby flooring of a 40-storey office tower.",
+      "Restoration and protection of the marble lobby flooring and reception area of a 40-storey office tower.",
     coverImage:
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80",
   },
@@ -187,9 +196,9 @@ export const fallbackTestimonials = [
     role_en: "Project Manager",
     company: "Luxe Developments",
     quote_id:
-      "Hasil before-after-nya luar biasa. Tim ISHINOL Indonesia sangat profesional dari awal hingga akhir.",
+      "Hasil before-after-nya luar biasa. Tim PT Indocoat Ishinol Utama sangat profesional dari awal hingga akhir.",
     quote_en:
-      "The before-and-after results were remarkable. The ISHINOL Indonesia team was professional from start to finish.",
+      "The before-and-after results were remarkable. The PT Indocoat Ishinol Utama team was professional from start to finish.",
     rating: 5,
   },
   {
@@ -198,9 +207,9 @@ export const fallbackTestimonials = [
     role_en: "General Manager",
     company: "Grand Hotel Group",
     quote_id:
-      "Perlindungan anti-slip mereka memberi kami ketenangan untuk keselamatan tamu tanpa mengorbankan estetika.",
+      "Lantai marmer lobi kami tetap berkilau dan bebas noda meski lalu lalang tamu sangat padat. Sangat puas dengan ISHINOL.",
     quote_en:
-      "Their anti-slip protection gives us peace of mind for guest safety without sacrificing aesthetics.",
+      "Our marble lobby floor stays glossy and stain-free despite very heavy guest traffic. We're delighted with ISHINOL.",
     rating: 5,
   },
 ];
@@ -217,8 +226,8 @@ export const fallbackWhy = [
     icon: "Sparkles",
     title_id: "Hasil Tak Terlihat",
     title_en: "Invisible Results",
-    body_id: "Melindungi tanpa mengubah keindahan alami batu Anda.",
-    body_en: "Protects without altering your stone's natural beauty.",
+    body_id: "Melindungi tanpa mengubah keindahan alami marmer Anda.",
+    body_en: "Protects without altering your marble's natural beauty.",
   },
   {
     icon: "Clock",
@@ -231,8 +240,8 @@ export const fallbackWhy = [
     icon: "Award",
     title_id: "Distributor Resmi",
     title_en: "Official Distributor",
-    body_id: "Pemegang merek dagang resmi ISHINOL di Indonesia.",
-    body_en: "Official ISHINOL trademark holder in Indonesia.",
+    body_id: "PT Indocoat Ishinol Utama, distributor resmi ISHINOL di Indonesia.",
+    body_en: "PT Indocoat Ishinol Utama, the official ISHINOL distributor in Indonesia.",
   },
 ];
 
@@ -273,24 +282,16 @@ export const fallbackArticles = [
   },
 ];
 
-export const fallbackVideos = [
-  {
-    title_id: "Profil ISHINOL Indonesia",
-    title_en: "ISHINOL Indonesia Profile",
-    source: "youtube",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    category: "marketing",
-    isFeatured: true,
-  },
-  {
-    title_id: "Demonstrasi Perlindungan Noda",
-    title_en: "Stain Protection Demonstration",
-    source: "youtube",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    category: "product",
-    isFeatured: true,
-  },
-];
+// Videos are managed from the Admin CMS (Videos module). No placeholder
+// videos are shipped — add your own ISHINOL/marble videos from /admin.
+export const fallbackVideos: Array<{
+  title_id: string;
+  title_en: string;
+  source: string;
+  url: string;
+  category: string;
+  isFeatured: boolean;
+}> = [];
 
 export const fallbackDownloads = [
   {
@@ -318,19 +319,19 @@ export const fallbackDownloads = [
 
 export const fallbackAbout = {
   distributor_id:
-    "Perusahaan kami adalah distributor resmi dan pemegang merek dagang ISHINOL di Indonesia. Setiap produk yang kami hadirkan diimpor langsung dan dijamin keasliannya dari ISHINOL Jepang.",
+    "PT Indocoat Ishinol Utama adalah distributor resmi ISHINOL di Indonesia. Setiap produk yang kami hadirkan diimpor langsung dan dijamin keasliannya dari ISHINOL Jepang.",
   distributor_en:
-    "Our company is the official distributor and trademark holder of ISHINOL in Indonesia. Every product we offer is imported directly and guaranteed authentic from ISHINOL Japan.",
+    "PT Indocoat Ishinol Utama is the official distributor of ISHINOL in Indonesia. Every product we offer is imported directly and guaranteed authentic from ISHINOL Japan.",
   vision_id:
-    "Menjadi solusi perlindungan permukaan premium terdepan dan paling tepercaya di Indonesia.",
+    "Menjadi solusi perlindungan marmer premium terdepan dan paling tepercaya di Indonesia.",
   vision_en:
-    "To be the leading and most trusted premium surface protection solution in Indonesia.",
+    "To be the leading and most trusted premium marble protection solution in Indonesia.",
   mission_id:
-    "Menghadirkan teknologi perlindungan batu alam terbaik dari Jepang dengan layanan profesional kelas dunia.",
+    "Menghadirkan teknologi perlindungan marmer terbaik dari Jepang dengan layanan profesional kelas dunia.",
   mission_en:
-    "To bring the finest Japanese stone protection technology to Indonesia with world-class professional service.",
+    "To bring the finest Japanese marble protection technology to Indonesia with world-class professional service.",
   history_id:
-    "Didirikan dengan visi menghadirkan keunggulan Jepang ke arsitektur Indonesia, kami telah melindungi ratusan proyek bergengsi di seluruh nusantara.",
+    "Didirikan dengan visi menghadirkan keunggulan marmer Jepang ke arsitektur Indonesia, kami telah melindungi ratusan proyek bergengsi di seluruh nusantara.",
   history_en:
-    "Founded with a vision to bring Japanese excellence to Indonesian architecture, we have protected hundreds of prestigious projects across the archipelago.",
+    "Founded with a vision to bring Japanese marble excellence to Indonesian architecture, we have protected hundreds of prestigious projects across the archipelago.",
 };
