@@ -9,6 +9,7 @@
     "about": "About Us",
     "products": "Products",
     "portfolio": "Portfolio",
+    "clients": "Clients",
     "news": "News",
     "videos": "Videos",
     "downloads": "Downloads",
@@ -101,6 +102,12 @@
     "title": "Portfolio",
     "subtitle": "Landmark projects protected by ISHINOL.",
     "gallery": "Project Gallery"
+  },
+  "Clients": {
+    "title": "Our Clients",
+    "subtitle": "Trusted by marble factories, warehouses and landmark projects across Indonesia.",
+    "empty": "Our client list will be displayed here soon.",
+    "visitWebsite": "Visit website"
   },
   "News": {
     "title": "News & Articles",
