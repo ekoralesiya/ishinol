@@ -23,11 +23,11 @@ export function buildMetadata({
   keywords,
 }: BuildMetadataArgs): Metadata {
   const fullTitle = title
-    ? `${title} — ISHINOL Indonesia`
-    : "ISHINOL Indonesia — Premium Japanese Stone & Marble Coating";
+    ? `${title} — ISHINOL`
+    : "ISHINOL — Premium Japanese Marble Coating | PT Indocoat Ishinol Utama";
   const desc =
     description ??
-    "ISHINOL is a premium Japanese protection coating for marble, granite & natural stone. Official distributor in Indonesia.";
+    "ISHINOL is a premium Japanese protection coating for marble. PT Indocoat Ishinol Utama is the official ISHINOL distributor in Indonesia.";
   const url = `${SITE_URL}${path}`;
   const ogImage = image ?? `${SITE_URL}/og-image.jpg`;
 
@@ -55,7 +55,7 @@ export function buildMetadata({
       title: fullTitle,
       description: desc,
       url,
-      siteName: "ISHINOL Indonesia",
+      siteName: "ISHINOL — PT Indocoat Ishinol Utama",
       locale: locale === "id" ? "id_ID" : "en_US",
       type,
       images: [{ url: ogImage, width: 1200, height: 630, alt: fullTitle }],
@@ -74,11 +74,12 @@ export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "ISHINOL Indonesia",
+    name: "PT Indocoat Ishinol Utama",
+    alternateName: "ISHINOL Indonesia",
     url: SITE_URL,
     logo: `${SITE_URL}/logo.png`,
     description:
-      "Official distributor and trademark holder of ISHINOL premium Japanese stone, marble and granite coating in Indonesia.",
+      "Official distributor of ISHINOL premium Japanese marble protection coating in Indonesia.",
     sameAs: [
       "https://instagram.com/ishinol.indonesia",
       "https://facebook.com/ishinol.indonesia",

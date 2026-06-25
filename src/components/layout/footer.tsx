@@ -35,6 +35,9 @@ export function Footer() {
       <div className="container-prose grid grid-cols-1 gap-10 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4">
           <div className="font-display text-2xl font-bold text-ink">ISHINOL</div>
+          <p className="text-xs font-medium uppercase tracking-wider text-ink/50">
+            PT Indocoat Ishinol Utama
+          </p>
           <p className="max-w-xs text-sm text-muted-foreground">{tf("tagline")}</p>
           <p className="text-xs font-medium uppercase tracking-wider text-gold-700">
             {tf("distributor")}

@@ -155,16 +155,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
             <ul className="mt-8 space-y-4">
               {(locale === "id"
                 ? [
-                    "Perlindungan permanen terhadap noda, air, dan minyak",
-                    "Menjaga keindahan alami tanpa mengubah tampilan",
-                    "Memperpanjang usia permukaan batu hingga puluhan tahun",
+                    "Perlindungan marmer permanen terhadap noda, air, dan minyak",
+                    "Menjaga keindahan alami marmer tanpa mengubah tampilan",
+                    "Memperpanjang usia permukaan marmer hingga puluhan tahun",
                     "Perawatan harian yang lebih mudah dan hemat",
                     "Teknologi Jepang yang ramah lingkungan",
                   ]
                 : [
-                    "Permanent protection against stains, water and oil",
-                    "Preserves natural beauty without altering appearance",
-                    "Extends stone surface life for decades",
+                    "Permanent marble protection against stains, water and oil",
+                    "Preserves marble's natural beauty without altering appearance",
+                    "Extends marble surface life for decades",
                     "Easier, more economical daily maintenance",
                     "Eco-friendly Japanese technology",
                   ]
