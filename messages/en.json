@@ -1,8 +1,8 @@
 {
   "Meta": {
-    "siteName": "ISHINOL Indonesia",
-    "defaultTitle": "ISHINOL Indonesia — Premium Japanese Stone & Marble Coating",
-    "defaultDescription": "ISHINOL is a premium Japanese protection coating for marble, granite & natural stone. Official distributor & trademark holder in Indonesia."
+    "siteName": "ISHINOL — PT Indocoat Ishinol Utama",
+    "defaultTitle": "ISHINOL — Premium Japanese Marble Coating",
+    "defaultDescription": "ISHINOL is a premium Japanese protection coating for marble. PT Indocoat Ishinol Utama is the official ISHINOL distributor in Indonesia."
   },
   "Nav": {
     "home": "Home",
@@ -38,21 +38,21 @@
     "sending": "Sending…"
   },
   "Home": {
-    "heroEyebrow": "Japanese Premium Surface Protection",
-    "heroHeadline": "The Art of Protecting Stone",
-    "heroSubheadline": "ISHINOL safeguards marble, granite and natural stone with a luxurious, durable Japanese coating — preserving brilliance for generations.",
+    "heroEyebrow": "Japanese Premium Marble Protection",
+    "heroHeadline": "The Art of Protecting Marble",
+    "heroSubheadline": "ISHINOL safeguards marble with a luxurious, durable Japanese coating — repelling stains and water while preserving its natural brilliance for generations.",
     "heroCta": "Explore Products",
     "heroSecondaryCta": "Talk to Sales",
-    "aboutEyebrow": "About ISHINOL",
-    "aboutTitle": "Japanese craftsmanship, Indonesian trust",
-    "aboutBody": "As the official distributor and trademark holder of ISHINOL in Indonesia, we bring the precision of Japanese surface science to the nation's most prestigious architecture.",
+    "aboutEyebrow": "About Us",
+    "aboutTitle": "Japanese marble science, Indonesian trust",
+    "aboutBody": "PT Indocoat Ishinol Utama is the official distributor of ISHINOL in Indonesia — bringing the precision of Japanese marble-protection technology to the nation's most prestigious architecture.",
     "whyTitle": "Why ISHINOL",
-    "whySubtitle": "Engineered protection that elevates every surface.",
+    "whySubtitle": "Engineered protection that elevates every marble surface.",
     "productsTitle": "Our Solutions",
-    "productsSubtitle": "A complete system for natural stone protection and restoration.",
+    "productsSubtitle": "A complete Japanese system for marble protection and restoration.",
     "benefitsTitle": "Built to last a lifetime",
     "beforeAfterTitle": "Before & After",
-    "beforeAfterSubtitle": "See the ISHINOL difference on real surfaces.",
+    "beforeAfterSubtitle": "See the ISHINOL difference on real marble surfaces.",
     "before": "Before",
     "after": "After",
     "projectsTitle": "Featured Projects",
@@ -64,12 +64,12 @@
     "contactSubtitle": "Speak with our specialists about your project."
   },
   "About": {
-    "title": "About ISHINOL Indonesia",
+    "title": "About PT Indocoat Ishinol Utama",
     "eyebrow": "About Us",
-    "intro": "The official distributor and trademark holder of ISHINOL premium Japanese stone protection in Indonesia.",
+    "intro": "PT Indocoat Ishinol Utama is the official distributor of ISHINOL — premium Japanese marble protection — in Indonesia.",
     "distributorTitle": "Official Distributor Statement",
     "japanTitle": "Our Relationship with ISHINOL Japan",
-    "japanBody": "ISHINOL is born from decades of Japanese surface science. As the appointed partner for Indonesia, we import every product directly from the source, ensuring authenticity, technical support, and the uncompromising quality that defines the ISHINOL name in Japan.",
+    "japanBody": "ISHINOL is born from decades of Japanese marble-coating science. As the appointed distributor for Indonesia, PT Indocoat Ishinol Utama imports every product directly from the source, ensuring authenticity, technical support, and the uncompromising quality that defines the ISHINOL name in Japan.",
     "visionTitle": "Vision",
     "missionTitle": "Mission",
     "historyTitle": "Company History",
@@ -88,7 +88,7 @@
   },
   "Products": {
     "title": "Products",
-    "subtitle": "Premium coating and protection systems for natural stone.",
+    "subtitle": "Premium Japanese coating and protection systems for marble.",
     "features": "Features",
     "benefits": "Benefits",
     "specifications": "Specifications",
@@ -145,7 +145,7 @@
     "chatOffline": "We're offline right now. Leave a message and we'll get back to you."
   },
   "Footer": {
-    "tagline": "Premium Japanese surface protection for natural stone.",
+    "tagline": "Premium Japanese protection coating for marble.",
     "quickLinks": "Quick Links",
     "company": "Company",
     "contact": "Contact",
