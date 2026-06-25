@@ -15,9 +15,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "ISHINOL Indonesia",
+  title: "ISHINOL — PT Indocoat Ishinol Utama",
   description:
-    "Official distributor of ISHINOL premium Japanese stone, marble and granite coating in Indonesia.",
+    "Official distributor of ISHINOL premium Japanese marble protection coating in Indonesia.",
   icons: { icon: "/favicon.ico" },
 };
 
