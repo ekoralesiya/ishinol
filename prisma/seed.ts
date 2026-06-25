@@ -16,7 +16,7 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱  Seeding ISHINOL Indonesia database…");
 
-  // ── Users ──────────────────────────────────────────────
+  // ── Users ───────────────────────────────────────────────
   const adminEmail = process.env.SEED_ADMIN_EMAIL ?? "admin@ishinol.co.id";
   const adminPassword = process.env.SEED_ADMIN_PASSWORD ?? "Ishinol#2026";
   const passwordHash = await bcrypt.hash(adminPassword, 12);
@@ -68,12 +68,12 @@ async function main() {
   });
   console.log("   ✓ Site settings");
 
-  // ── Hero (full refresh) ────────────────────────────────
+  // ── Hero (full refresh) ──────────────────────────────────
   await prisma.heroBanner.deleteMany();
   await prisma.heroBanner.create({ data: { ...fallbackHero, order: 0 } });
   console.log("   ✓ Hero banner");
 
-  // ── Product categories + products ──────────────────────
+  // ── Product categories + products ─────────────────────────
   const categoryMap: Record<string, string> = {};
   for (const [slug, names] of Object.entries({
     coating: { id: "Pelapis", en: "Coating" },
@@ -157,7 +157,7 @@ async function main() {
   }
   console.log(`   ✓ ${fallbackProjects.length} portfolio projects`);
 
-  // ── Articles ───────────────────────────────────────────
+  // ── Articles ──────────────────────────────────────────
   const articleCats: Record<string, string> = {};
   for (const [slug, names] of Object.entries({
     tips: { id: "Tips", en: "Tips" },
@@ -196,14 +196,14 @@ async function main() {
   }
   console.log(`   ✓ ${fallbackArticles.length} articles`);
 
-  // ── Testimonials ───────────────────────────────────────
+  // ── Testimonials ──────────────────────────────────────
   await prisma.testimonial.deleteMany();
   for (const [i, t] of fallbackTestimonials.entries()) {
     await prisma.testimonial.create({ data: { ...t, order: i } });
   }
   console.log(`   ✓ ${fallbackTestimonials.length} testimonials`);
 
-  // ── Videos ──────────────────────────────────────────────
+  // ── Videos ──────────────────────────────────────────
   // Remove any placeholder videos; real videos are added from the Admin CMS.
   await prisma.video.deleteMany();
   for (const [i, v] of fallbackVideos.entries()) {
