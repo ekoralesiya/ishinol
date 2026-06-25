@@ -552,6 +552,77 @@ export async function deleteTestimonial(id: string): Promise<ActionResult> {
 }
 
 // ─────────────────────────────────────────────────────────────
+// CLIENTS (Klien Kami)
+// ─────────────────────────────────────────────────────────────
+
+export async function upsertClient(formData: FormData): Promise<ActionResult> {
+  const guard = await authorize("content:write");
+  if ("error" in guard) return { ok: false, error: guard.error };
+
+  const id = str(formData.get("id"));
+  const name = str(formData.get("name"));
+  if (!name) return { ok: false, error: "Name is required" };
+
+  const data = {
+    name,
+    logoUrl: optStr(formData.get("logoUrl")),
+    website: optStr(formData.get("website")),
+    category: str(formData.get("category")) || "general",
+    order: intOrNull(formData.get("order")) ?? 0,
+    isActive: bool(formData.get("isActive")),
+  };
+
+  try {
+    if (id && id !== "new") {
+      await prisma.client.update({ where: { id }, data });
+      await audit(guard.user.id, "UPDATE", "Client", id);
+    } else {
+      const created = await prisma.client.create({ data });
+      await audit(guard.user.id, "CREATE", "Client", created.id);
+      revalidatePath("/admin/clients");
+      revalidatePath("/", "layout");
+      return { ok: true, id: created.id };
+    }
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Database error" };
+  }
+
+  revalidatePath("/admin/clients");
+  revalidatePath("/", "layout");
+  return { ok: true, id };
+}
+
+export async function deleteClient(id: string): Promise<ActionResult> {
+  const guard = await authorize("content:write");
+  if ("error" in guard) return { ok: false, error: guard.error };
+  try {
+    await prisma.client.delete({ where: { id } });
+    await audit(guard.user.id, "DELETE", "Client", id);
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Database error" };
+  }
+  revalidatePath("/admin/clients");
+  revalidatePath("/", "layout");
+  return { ok: true };
+}
+
+export async function toggleClientActive(id: string): Promise<ActionResult> {
+  const guard = await authorize("content:write");
+  if ("error" in guard) return { ok: false, error: guard.error };
+  try {
+    const existing = await prisma.client.findUnique({ where: { id }, select: { isActive: true } });
+    if (!existing) return { ok: false, error: "Client not found" };
+    await prisma.client.update({ where: { id }, data: { isActive: !existing.isActive } });
+    await audit(guard.user.id, "UPDATE", "Client", id, { isActive: !existing.isActive });
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Database error" };
+  }
+  revalidatePath("/admin/clients");
+  revalidatePath("/", "layout");
+  return { ok: true };
+}
+
+// ─────────────────────────────────────────────────────────────
 // LEADS
 // ─────────────────────────────────────────────────────────────
 
